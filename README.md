@@ -11,15 +11,6 @@ Here, I share my accepted solutions from platforms like:
 
 ---
 
-## 📂 Folder Structure
-
-Each folder contains problems from the respective platform.
-├── Codeforces/
-├── CodeChef/
-├── AtCoder/
-├── CSES/
-├── SPOJ/
-
 ## 🙋‍♂️ Why This Repo?
 
 - To track my learning journey
