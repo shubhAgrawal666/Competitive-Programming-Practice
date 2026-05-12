@@ -12,39 +12,49 @@ void solve()
     int n;
     cin >> n;
     vector<int> arr(n);
-    int cnt1 = 0;
-    int ans1 = 0;
+    int ans = 0;
     for (int i = 0; i < n; i++)
     {
         cin >> arr[i];
         if (arr[i] == 1)
         {
-            cnt1++;
-            ans1 = max(ans1, cnt1);
+            ans++;
+        }
+    }
+    int maxi = 0;
+    int cnt = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (arr[i] == 0)
+        {
+            cnt++;
         }
         else
         {
-            ans1 = max(ans1, cnt1);
-            cnt1 = 0;
+            cnt--;
         }
-        ans1 = max(ans1, cnt1);
+        if (cnt >= 0)
+        {
+            maxi = max(maxi, cnt);
+        }
+        else
+        {
+            cnt = 0;
+        }
     }
-    int cnt0 = 0;
-    int ans0 = 0;
-    int l = -1;
-    int r = -1;
-    for (int i = 0; i < n; i++)
+    if (maxi <= 0)
     {
-        
+        cout << n - 1 << endl;
+        return;
     }
+    cout << ans + maxi << endl;
 }
 int main()
 {
     ios::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
-    int t;
-    cin >> t;
+    int t = 1;
     while (t--)
     {
         solve();

@@ -11,16 +11,15 @@ void solve()
 {
   ll n;
   cin >> n;
-  ll ans = LONG_LONG_MAX;
+  ll ans = LONG_LONG_MIN;
   for (ll i = 1; i * i <= n; i++)
   {
-    ll j = n / i;
-    if (gcd(i, j) == 1 && n % i == 0 && n % j == 0)
+    if (n % i == 0 && gcd(i, n / i) == 1)
     {
-      ans = min(ans, max(i, j));
+      ans = i;
     }
   }
-  cout << min(ans, n / ans) << " " << max(ans, n / ans) << endl;
+  cout << min(n / ans, ans) << " " << max(ans, n / ans) << endl;
 }
 int main()
 {

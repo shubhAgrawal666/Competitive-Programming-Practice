@@ -278,36 +278,47 @@ void solve()
 {
   ll n;
   cin >> n;
-  vector<ll> arr;
-  ll x = 0;
-  unordered_set<ll> st;
-  for (ll i = 0; i < n; i++)
+  vector<ll> arr(n);
+  vector<ll> pref(n);
+  int x = 0;
+  for (int i = 0; i < n; i++)
   {
-    int y;
-    cin >> y;
-    if (y != 0)
-    {
-      arr.push_back(y);
-      x = (x ^ y);
-      st.insert(y);
-    }
+    cin >> arr[i];
+    x ^= arr[i];
+    pref[i] = x;
   }
-  if (st.size() == 1)
+  if (x == 0)
   {
     cout << "YES" << endl;
     return;
   }
   else
   {
-    if (x == 0)
+    int st = 0;
+    int st1 = n - 1;
+    while (st < n && pref[st] != x)
     {
-      cout << "YES" << endl;
-      return;
+      st++;
+    }
+    while (st1 >= 0 && pref[st1] != x)
+    {
+      st1--;
+    }
+    if (st < st1)
+    {
+      for (int i = st; i <= st1; i++)
+      {
+        if (pref[i] == 0)
+        {
+          cout << "YES" << endl;
+          return;
+        }
+      }
+      cout << "NO" << endl;
     }
     else
     {
       cout << "NO" << endl;
-      return;
     }
   }
 }

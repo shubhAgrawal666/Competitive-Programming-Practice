@@ -17,11 +17,18 @@ void solve()
     cin >> arr[i];
   }
   ll ans = 0;
-  for (ll i = 2; i < n; i++)
+  for (ll i = 0; i < n; i++)
   {
-    ll idx = lower_bound(arr.begin(), arr.end(), arr[i] - k) - arr.begin();
-    ll temp = i - idx;
-    ans += (temp * (temp - 1)) / 2;
+    auto it = lower_bound(arr.begin(), arr.end(), arr[i] + k);
+    if (it == arr.end() || *it > (arr[i] + k))
+    {
+      it--;
+    }
+    ll cnt = (it - arr.begin()) - i + 1;
+    if (cnt >= 3)
+    {
+      ans += ((cnt - 1) * (cnt - 2)) / 2;
+    }
   }
   cout << ans << endl;
 }

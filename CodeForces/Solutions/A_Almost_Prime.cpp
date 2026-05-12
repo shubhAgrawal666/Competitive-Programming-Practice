@@ -16,15 +16,20 @@ vector<ll> sieve(int n)
   {
     if (isPrime[i])
     {
-      prime.push_back(i);
-      for (ll j = i * i; j <= n; j += 1)
+      for (ll j = i * i; j <= n; j += i)
       {
         isPrime[j] = false;
       }
     }
   }
+  for (ll i = 2; i <= n; i++)
+  {
+    if (isPrime[i])
+      prime.push_back(i);
+  }
   return prime;
 }
+
 vector<pair<int, int>> primeFactorisation(int x, vector<int> &spf)
 {
   vector<pair<int, int>> ans;
@@ -65,11 +70,18 @@ void solve()
   int n;
   cin >> n;
   int cnt = 0;
-  vector<int> spf = smallprime(n + 1);
+  vector<ll> Primes = sieve(n);
   for (int i = 1; i <= n; i++)
   {
-    vector<pair<int, int>> temp = primeFactorisation(i, spf);
-    if (temp.size() == 2)
+    int temp = 0;
+    for (int j = 2; j < i; j++)
+    {
+      if ((i % j) == 0 && binary_search(Primes.begin(), Primes.end(), j))
+      {
+        temp++;
+      }
+    }
+    if (temp == 2)
     {
       cnt++;
     }

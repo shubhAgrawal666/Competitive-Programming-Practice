@@ -61,20 +61,22 @@ void solve()
     sum *= mod_div(temp, deno, MOD);
     sum %= MOD;
   }
-  ll num = 1;
-  ll pro = 1;
+  ll finans = 1;
+  // cout << ans1 << endl;
   for (auto it : arr)
   {
-    pro = expo(pro, it.second + 1, MOD);
-    ll temp = (it.second * (it.second + 1)) / 2;
-    ll base = expo(it.first, temp, MOD);
-    ll val = expo(base, num, MOD);
-    pro *= val;
-    pro %= MOD;
-    num *= (it.second + 1);
-    num %= (MOD - 1);
+    ll power = ((it.second % MOD) * (ans1 % MOD)) % MOD;
+    ll acpower = mod_div(power, 2, MOD);
+    ll temp = (expo(it.first, acpower, MOD));
+    // cout << temp << endl;
+    // cout << finans << " " << temp << " " << finans * temp << endl;
+    finans = ((finans % MOD) * (temp % MOD)) % MOD;
+    // cout << acpower << endl;
+    // cout << num % MOD << endl;
+    // cout << (expo(it.first, acpower, MOD)) << endl;
+    // cout << num << endl;
   }
-  cout << ans1 % MOD << " " << sum % MOD << " " << pro % MOD << endl;
+  cout << ans1 % MOD << " " << sum % MOD << " " << finans % MOD << endl;
 }
 int main()
 {

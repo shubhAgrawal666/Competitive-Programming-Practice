@@ -9,38 +9,55 @@ using namespace std;
     cin >> vec[i];
 void solve()
 {
-
-  int N;
-  cin >> N;
-  vector<int> A(N), B(N);
-  vector<int> freq(N);
-  for (int i = 0; i < N; ++i)
+  int n;
+  cin >> n;
+  vector<int> arr(n);
+  vector<int> brr(n);
+  for (int i = 0; i < n; i++)
   {
-    cin >> A[i];
-    freq[A[i]]++;
+    cin >> arr[i];
   }
-  for (int i = 0; i < N; ++i)
+  for (int i = 0; i < n; i++)
   {
-    cin >> B[i];
-    freq[B[i]]++;
+    cin >> brr[i];
   }
-  for (int i = 0; i < N; i++)
+  set<int> both, one;
+  for (int i = 0; i < n; i++)
   {
-    if (freq[i] < 2)
+    if (arr[i] == brr[i])
+      both.insert(arr[i]);
+    else
     {
-      cout << i << endl;
-      return;
+      one.insert(arr[i]);
+      one.insert(brr[i]);
     }
   }
-  cout << N - 1 << endl;
+  int mex = 0;
+  bool first = true;
+  while (true)
+  {
+    if (both.count(mex))
+    {
+      mex++;
+    }
+    else if (first && one.count(mex))
+    {
+      mex++;
+      first = false;
+    }
+    else
+      break;
+  }
+  cout << mex << endl;
 }
 int main()
 {
   ios::sync_with_stdio(false);
-  cin.tie(nullptr);
-  int T;
-  cin >> T;
-  while (T--)
+  cin.tie(NULL);
+  cout.tie(NULL);
+  int t;
+  cin >> t;
+  while (t--)
   {
     solve();
   }

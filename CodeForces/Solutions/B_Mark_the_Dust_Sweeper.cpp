@@ -1,46 +1,39 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-int main(){
-    int t;
-    cin>>t;
-    while(t--){
+int main()
+{
+    long long int t;
+    cin >> t;
+    while (t--)
+    {
         long long int n;
-        cin>>n;
-        vector<long long int> arr(n,0);
-        for(long long int i=0;i<n;i++){
-            cin>>arr[i];
-        }
-        long long int back = 0;
-        long long int front = 1;
-        long long int count = 0;
-        while(back<n&&front<n){
-            if(arr[back]==0){
-                back++;
+        cin >> n;
+        vector<long long int> arr(n);
+        long long int ans = 0;
+        bool b = false;
+        for (long long int i = 0; i < n; i++)
+        {
+            cin >> arr[i];
+            if (arr[i] != 0)
+            {
+                b = true;
             }
-            if(arr[front]!=0){
-                front++;
-            }
-            if(back>=front&&back<=n-2){
-                front = back+1;
-            }
-            if(arr[back]!=0&&arr[front]==0&&back<n&&front<n){
-                arr[back]--;
-                arr[front]++;
-                if(front<=n-2){
-                    front++;
+            if (b)
+            {
+                if (i != n - 1)
+                {
+                    if (arr[i] == 0)
+                    {
+                        ans += 1;
+                    }
+                    else
+                    {
+                        ans += arr[i];
+                    }
                 }
-                if(arr[back]==0){
-                    back++;
-                }
-                count++;
             }
         }
-        for(long long int i = 0;i<=n-2;i++){
-            if(arr[i]!=0){
-                count+=arr[i];
-            }
-        }
-        cout<<count<<endl;
+        cout << ans << endl;
     }
     return 0;
 }

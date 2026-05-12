@@ -23,49 +23,30 @@ void solve()
 {
   ll p, q;
   cin >> p >> q;
-  vector<int> prime;
-  ll nq = q;
-  for (ll i = 2; i * i <= nq; i++)
+  if (p < q)
   {
-    if (nq % i == 0)
+    cout << p << endl;
+  }
+  else
+  {
+    if (p % q != 0)
     {
-      prime.push_back(i);
-      while (nq % i == 0)
+      cout << p << endl;
+    }
+    else
+    {
+      ll ans = LLONG_MIN;
+      for (ll i = (ll)sqrtl(p); i >= 2; i--)
       {
-        nq /= i;
+        if (p % i == 0)
+        {
+          ll sec = p / i;
+          ll fir = i;
+                }
       }
+      // cout << ans << endl;
     }
   }
-  if (nq > 1)
-  {
-    prime.push_back(nq);
-  }
-  ll ans = p;
-  for (auto pr : prime)
-  {
-    ll a = 0;
-    ll b = 0;
-    ll np = p;
-    ll nq = q;
-    while (np % pr == 0)
-    {
-      a++;
-      np /= pr;
-    }
-    while (nq % pr == 0)
-    {
-      b++;
-      nq /= pr;
-    }
-    ll drop = a - b + 1;
-    ll val = 1;
-    for (int i = 0; i < drop; i++)
-    {
-      val *= pr;
-    }
-    ans = min(ans, val);
-  }
-  cout << p / ans << endl;
 }
 int main()
 {

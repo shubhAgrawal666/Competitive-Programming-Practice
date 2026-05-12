@@ -1,31 +1,40 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-int main(){
+
+int main()
+{
     ios::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
+    cin.tie(nullptr);
     int t;
-    cin>>t;
-    while(t--){
-        int n,k;
-        cin>>n>>k;
+    cin >> t;
+    while (t--)
+    {
+        int n, k;
+        cin >> n >> k;
         vector<int> arr(n);
-        for(int i=0;i<n;i++){
-            cin>>arr[i];
+        int i = 0;
+        while (i < n)
+        {
+            cin >> arr[i];
+            i++;
         }
-        unordered_map<int,int> mp;
+        unordered_map<int, int> mp;
+        int start = 0, end = 0;
         int ans = 0;
-        for(int i=1;i<=k;i++){
-            mp[i]=-1;
+        while (end < n)
+        {
+            mp[arr[end]]++;
+            while ((int)mp.size() == k)
+            {
+                mp[arr[start]]--;
+                if (mp[arr[start]] == 0)
+                    mp.erase(arr[start]);
+                start++;
+            }
+            ans = max(ans, end - start + 1);
+            end++;
         }
-        for(int i=0;i<n;i++){
-            ans=max(ans,i-mp[arr[i]]-1);
-            mp[arr[i]] = i;
-        }
-        for(int i=1;i<=k;i++){
-            ans = max(ans,n-mp[i]-1);
-        }
-        cout<<ans<<endl;
+        cout << ans << "\n";
     }
     return 0;
 }
